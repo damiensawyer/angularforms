@@ -1,0 +1,44 @@
+<form [formGroup]='profileForm'>
+    <h1>Profile Form</h1>
+    <div>
+        <label for='first-name-input'>First Name:</label>
+        <input type='text' id='first-name-input' formControlName='firstNameInput'>
+        <p>Firstname: {{profileForm.controls['firstNameInput'].value }}</p>
+    </div>
+    <div>
+        <label for='last-name-input'>Last Name:</label>
+        <input type='text' id='last-name-input' formControlName='lastNameInput'>
+    </div>
+    <div formArrayName='addressGroups'>
+        <div *ngFor='let addressGroup of profileForm.controls["addressGroups"].controls' [formGroup]="addressGroup">
+            <h2>Address</h2>
+            <div>
+                <label for='street-input'>Street:</label>
+                <input type='text' id='street-input' formControlName='streetInput'>
+            </div>
+            <div>
+                <label for='city-input'>City:</label>
+                <input type='text' id='city-input' formControlName='cityInput'>
+            </div>
+            <div>
+                <label for='state-input'>State:</label>
+                <input type='text' id='state-input' formControlName='stateInput'>
+            </div>
+            <div>
+                <label for='zip-code-input'>Zip Code:</label>
+                <input type='text' id='zip-code-input' formControlName='zipCodeInput'>
+            </div>
+        </div>
+        <button type='button' (click)='addAddressGroup()'>Add Address</button>
+
+        <div>
+            <button type='button' (click)='saveProfileForm()'>Save Profile</button>
+        </div>
+    </div>
+</form>
+
+<div>
+    <p>Dirty: {{ isDirty ? 'yes - waiting to save' : 'no'}}</p>
+    <pre>{{ jsonResult }}</pre>
+
+</div>
