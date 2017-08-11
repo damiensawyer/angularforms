@@ -3,8 +3,9 @@ import { FormControl, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/distinctUntilChanged';
-
+// import * as rx from 'rxjs';
 import 'rxjs/add/operator/do';
 
 
@@ -35,8 +36,11 @@ export class AppComponent {
 
     this.profileForm.valueChanges
       .do(x => this.isDirty = true)
+      // .filter(x => this.profileForm.controls['firstNameInput'].value === 'damien')
       .debounceTime(1000) // https://www.learnrxjs.io/operators/filtering/debouncetime.html
-      .distinctUntilChanged() // At the time of writing this doesn't work due to an rx bug. See workaround below as described here. https://github.com/ReactiveX/rxjs/issues/1686
+      // At the time of writing this doesn't work due to an rx bug. See workaround below as described here. 
+      // https://github.com/ReactiveX/rxjs/issues/1686
+      .distinctUntilChanged()
       .do(x => this.isDirty = false)
       .subscribe(x => {
         this.jsonResult = JSON.stringify(this.profileForm.value, undefined, 2);

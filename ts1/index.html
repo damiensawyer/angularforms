@@ -1,0 +1,19 @@
+<head>
+
+</head>
+
+<body>
+    <div>hello</div>
+    <div>hello</div>
+
+    <script src='/node_modules/systemjs/dist/system.js'></script>
+    <script>
+        // System js is often configured using inline code like this. 
+        System.config({
+            meta: {
+                format: 'cjs' // tell it that we're using common js module formats.
+            }
+        });
+        System.import('main.js'); // specify the start point
+    </script>
+</body>
